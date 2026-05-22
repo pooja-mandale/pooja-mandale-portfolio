@@ -20,6 +20,12 @@ const Projects = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  useEffect(() => {
+    if (isMobile && selectedProject && selectedProject.id === 'enamel' && activeImageIndex === 0) {
+      setActiveImageIndex(1)
+    }
+  }, [isMobile, selectedProject, activeImageIndex])
+
   return (
     <section id="projects" className="py-32 relative bg-transparent">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
@@ -160,7 +166,7 @@ const Projects = () => {
             </button>
 
             {/* Scrollable Content Container */}
-            <div className="overflow-y-auto p-5 md:p-10 space-y-6 md:space-y-8">
+            <div className="overflow-y-auto overflow-x-hidden p-5 md:p-10 space-y-6 md:space-y-8 w-full max-w-full">
               
               {/* Header */}
               <div className="space-y-4 pr-16 md:pr-0">
@@ -206,13 +212,13 @@ const Projects = () => {
               </div>
 
               {/* Main Media & Info Grid */}
-              <div className="grid lg:grid-cols-2 gap-10 items-start">
+              <div className="grid lg:grid-cols-2 gap-10 items-start w-full">
                 
                 {/* Left Side - Image Gallery */}
-                <div className={`space-y-4 order-2 lg:order-1 ${selectedProject.id === 'enamel' ? 'block' : 'hidden md:block'}`}>
+                <div className={`space-y-4 order-1 lg:order-1 w-full min-w-0 flex flex-col items-center ${selectedProject.id === 'enamel' ? 'block' : 'hidden md:block'}`}>
                   <div className={`relative rounded-2xl overflow-hidden bg-dark/40 border border-light/10 flex items-center justify-center transition-all duration-300 ${
                     selectedProject && selectedProject.images && selectedProject.images[activeImageIndex] && (selectedProject.id === 'enamel' && activeImageIndex > 0)
-                      ? 'aspect-[9/16] h-[45vh] md:h-[55vh] w-auto mx-auto'
+                      ? 'aspect-[9/16] w-full max-w-[240px] h-auto md:max-w-none md:h-[55vh] md:w-[31vh] mx-auto'
                       : 'aspect-[16/10] w-full'
                   }`}>
                     <img
@@ -249,7 +255,7 @@ const Projects = () => {
 
                   {/* Thumbnails */}
                   {selectedProject.images && selectedProject.images.length > 1 && (
-                    <div className="flex gap-3 overflow-x-auto pb-2">
+                    <div className="flex gap-3 overflow-x-auto pb-2 w-full max-w-full">
                       {selectedProject.images.map((img, idx) => {
                         if (isMobile && selectedProject.id === 'enamel' && idx === 0) return null;
                         return (
@@ -269,7 +275,7 @@ const Projects = () => {
                 </div>
 
                 {/* Right Side - Long Description & Features */}
-                <div className="space-y-5 md:space-y-6 order-1 lg:order-2">
+                <div className="space-y-5 md:space-y-6 order-2 lg:order-2 w-full min-w-0">
                   <div className="space-y-2 md:space-y-3">
                     <h4 className="text-xs uppercase font-bold tracking-[0.2em] text-light/50">Overview</h4>
                     <p className="text-light/70 text-sm md:text-base font-light leading-relaxed">
