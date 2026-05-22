@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, X, Check, Globe, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -9,6 +9,16 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [lightboxImage, setLightboxImage] = useState(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <section id="projects" className="py-32 relative bg-transparent">
@@ -66,7 +76,7 @@ const Projects = () => {
               transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
               onClick={() => {
                 setSelectedProject(project)
-                setActiveImageIndex(0)
+                setActiveImageIndex(isMobile && project.id === 'enamel' ? 1 : 0)
               }}
               className="group flex flex-col glass-card rounded-3xl overflow-hidden hover:border-primary/30 hover:shadow-[0_12px_40px_rgba(99,102,241,0.1)] hover:-translate-y-1 transition-all duration-500 cursor-pointer"
             >
@@ -150,7 +160,7 @@ const Projects = () => {
             </button>
 
             {/* Scrollable Content Container */}
-            <div className="overflow-y-auto p-6 md:p-10 space-y-8">
+            <div className="overflow-y-auto p-5 md:p-10 space-y-6 md:space-y-8">
               
               {/* Header */}
               <div className="space-y-4 pr-16 md:pr-0">
@@ -161,22 +171,48 @@ const Projects = () => {
                     </span>
                   ))}
                 </div>
-                <h3 className="text-3xl md:text-4xl font-serif font-normal text-light">
+                <h3 className="text-2xl md:text-4xl font-serif font-normal text-light">
                   {selectedProject.title}
                 </h3>
-                <p className="text-light/80 text-base md:text-lg font-light leading-relaxed">
+                <p className="text-light/80 text-sm md:text-lg font-light leading-relaxed">
                   {selectedProject.desc}
                 </p>
+                
+                {/* Mobile CTA Links */}
+                <div className="flex flex-wrap gap-3 pt-2 md:hidden">
+                  {selectedProject.github && selectedProject.github !== "#" && (
+                    <a
+                      href={selectedProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 bg-light/5 border border-light/10 text-light text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-full flex-1 min-w-[120px] transition-all duration-300"
+                    >
+                      <Github size={14} />
+                      Code
+                    </a>
+                  )}
+                  {selectedProject.link && selectedProject.link !== "#" && (
+                    <a
+                      href={selectedProject.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 bg-primary text-white text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-full shadow-[0_4px_15px_rgba(99,102,241,0.2)] flex-1 min-w-[120px] transition-all duration-300"
+                    >
+                      <Globe size={14} />
+                      Live
+                    </a>
+                  )}
+                </div>
               </div>
 
               {/* Main Media & Info Grid */}
               <div className="grid lg:grid-cols-2 gap-10 items-start">
                 
                 {/* Left Side - Image Gallery */}
-                <div className="space-y-4">
+                <div className={`space-y-4 order-2 lg:order-1 ${selectedProject.id === 'enamel' ? 'block' : 'hidden md:block'}`}>
                   <div className={`relative rounded-2xl overflow-hidden bg-dark/40 border border-light/10 flex items-center justify-center transition-all duration-300 ${
                     selectedProject && selectedProject.images && selectedProject.images[activeImageIndex] && (selectedProject.id === 'enamel' && activeImageIndex > 0)
-                      ? 'aspect-[9/16] max-h-[55vh] mx-auto w-fit'
+                      ? 'aspect-[9/16] h-[45vh] md:h-[55vh] w-auto mx-auto'
                       : 'aspect-[16/10] w-full'
                   }`}>
                     <img
@@ -190,13 +226,19 @@ const Projects = () => {
                     {selectedProject.images && selectedProject.images.length > 1 && (
                       <>
                         <button
-                          onClick={() => setActiveImageIndex((prev) => (prev === 0 ? selectedProject.images.length - 1 : prev - 1))}
+                          onClick={() => {
+                            const startIdx = (isMobile && selectedProject.id === 'enamel') ? 1 : 0;
+                            setActiveImageIndex((prev) => (prev <= startIdx ? selectedProject.images.length - 1 : prev - 1));
+                          }}
                           className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-dark/80 backdrop-blur-sm text-light/80 hover:text-light flex items-center justify-center hover:bg-primary transition-all border border-light/10 cursor-pointer"
                         >
                           <ChevronLeft size={16} />
                         </button>
                         <button
-                          onClick={() => setActiveImageIndex((prev) => (prev === selectedProject.images.length - 1 ? 0 : prev + 1))}
+                          onClick={() => {
+                            const startIdx = (isMobile && selectedProject.id === 'enamel') ? 1 : 0;
+                            setActiveImageIndex((prev) => (prev === selectedProject.images.length - 1 ? startIdx : prev + 1));
+                          }}
                           className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-dark/80 backdrop-blur-sm text-light/80 hover:text-light flex items-center justify-center hover:bg-primary transition-all border border-light/10 cursor-pointer"
                         >
                           <ChevronRight size={16} />
@@ -208,24 +250,27 @@ const Projects = () => {
                   {/* Thumbnails */}
                   {selectedProject.images && selectedProject.images.length > 1 && (
                     <div className="flex gap-3 overflow-x-auto pb-2">
-                      {selectedProject.images.map((img, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => setActiveImageIndex(idx)}
-                          className={`w-20 aspect-[16/10] rounded-lg overflow-hidden border-2 transition-all relative shrink-0 cursor-pointer ${
-                            activeImageIndex === idx ? 'border-primary' : 'border-light/10 hover:border-light/30'
-                          }`}
-                        >
-                          <img src={img} alt="thumbnail" className="w-full h-full object-cover" />
-                        </button>
-                      ))}
+                      {selectedProject.images.map((img, idx) => {
+                        if (isMobile && selectedProject.id === 'enamel' && idx === 0) return null;
+                        return (
+                          <button
+                            key={idx}
+                            onClick={() => setActiveImageIndex(idx)}
+                            className={`w-14 md:w-20 ${selectedProject.id === 'enamel' ? 'aspect-[9/16]' : 'aspect-[16/10]'} rounded-lg overflow-hidden border-2 transition-all relative shrink-0 cursor-pointer ${
+                              activeImageIndex === idx ? 'border-primary' : 'border-light/10 hover:border-light/30'
+                            }`}
+                          >
+                            <img src={img} alt="thumbnail" className="w-full h-full object-cover" />
+                          </button>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
 
                 {/* Right Side - Long Description & Features */}
-                <div className="space-y-6">
-                  <div className="space-y-3">
+                <div className="space-y-5 md:space-y-6 order-1 lg:order-2">
+                  <div className="space-y-2 md:space-y-3">
                     <h4 className="text-xs uppercase font-bold tracking-[0.2em] text-light/50">Overview</h4>
                     <p className="text-light/70 text-sm md:text-base font-light leading-relaxed">
                       {selectedProject.longDesc || selectedProject.desc}
@@ -233,7 +278,7 @@ const Projects = () => {
                   </div>
 
                   {selectedProject.features && selectedProject.features.length > 0 && (
-                    <div className="space-y-3">
+                    <div className="space-y-2 md:space-y-3">
                       <h4 className="text-xs uppercase font-bold tracking-[0.2em] text-light/50">Key Features</h4>
                       <ul className="grid md:grid-cols-2 lg:grid-cols-1 gap-3">
                         {selectedProject.features.map((feature, fi) => (
@@ -249,7 +294,7 @@ const Projects = () => {
                   )}
 
                   {/* CTA Links in Modal */}
-                  <div className="flex flex-wrap gap-4 pt-4 border-t border-light/5">
+                  <div className="hidden md:flex flex-wrap gap-4 pt-4 border-t border-light/5">
                     {selectedProject.github && selectedProject.github !== "#" && (
                       <a
                         href={selectedProject.github}
