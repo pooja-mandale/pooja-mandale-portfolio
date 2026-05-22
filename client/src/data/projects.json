@@ -1,0 +1,68 @@
+[
+  {
+    "id": "solar-panel",
+    "title": "Solar Energy Platform",
+    "desc": "A full-stack web application designed for the solar sector, featuring real-time energy diagnostics and analytics.",
+    "longDesc": "A comprehensive web application tailored for the solar energy sector. It integrates responsive frontend analytics with a robust backend service to monitor solar panel array efficiency, power generation outputs, battery cell charge levels, and carbon reduction metrics in real-time.",
+    "tags": ["React", "Node.js", "Tailwind CSS", "Chart.js"],
+    "images": [
+      "/solar_cover.jpg",
+      "/solar_analytics.png",
+      "/solar_battery.png"
+    ],
+    "link": "https://solar-panel-project.onrender.com/",
+    "github": "https://github.com/pooja-mandale/solar-panel-project",
+    "features": [
+      "Real-time energy generation & savings tracking",
+      "Interactive panel efficiency metrics via Chart.js",
+      "Battery health and backup power diagnostics",
+      "Responsive, clean dark mode layout"
+    ]
+  },
+  {
+    "id": "the-search-job",
+    "title": "theSearchjob",
+    "desc": "A comprehensive full-stack job portal facilitating real-time job searches, applications, and recruitment management.",
+    "longDesc": "theSearchjob is a robust, responsive job search platform designed to connect job seekers with potential employers. It features advanced job search filtering, candidate profile building, resume uploads, and an employer dashboard to track applicant pipelines and manage listings.",
+    "tags": ["React", "Node.js", "Express", "MongoDB"],
+    "images": [
+      "/job_portal_cover.jpg"
+    ],
+    "link": "http://api.thesearchjob.com",
+    "github": "https://github.com/pooja-mandale/theJobSearch",
+    "features": [
+      "Advanced keyword, role, and location filtering",
+      "Employer listing administration and applicant tracking",
+      "Candidate resume uploads and profile manager",
+      "Secure authentication and dashboard metrics"
+    ]
+  },
+  {
+    "id": "enamel",
+    "title": "Enamel (Scholar Plus)",
+    "desc": "A premium educational learning portal featuring interactive course modules, subject-wise progress tracking, and student diagnostics.",
+    "longDesc": "Enamel Scholar Plus is an elegant, mobile-responsive education dashboard designed for seamless student learning. It offers a structured subject-wise curriculum (Physics, Chemistry, Zoology, etc.), custom study materials, and interactive analytics to monitor learning progress in real-time. Built with a focus on fluid animations and responsive layout structures.",
+    "tags": ["React", "Tailwind CSS", "Framer Motion", "Education"],
+    "images": [
+      "/enamel_cover.jpg",
+      "/enamel/enamel (2).jpeg",
+      "/enamel/enamel (3).jpeg",
+      "/enamel/enamel (4).jpeg",
+      "/enamel/enamel (5).jpeg",
+      "/enamel/enamel (6).jpeg",
+      "/enamel/enamel (7).jpeg",
+      "/enamel/enamel (8).jpeg",
+      "/enamel/enamel (9).jpeg",
+      "/enamel/enamel (10).jpeg",
+      "/enamel/enamel (11).jpeg"
+    ],
+    "link": "#",
+    "github": "https://github.com/pooja-mandale/enamel",
+    "features": [
+      "Interactive subject-wise curriculum coverage",
+      "Premium glassmorphic study dashboard and progress indicators",
+      "Seamless mobile-first responsive layout transitions",
+      "Dynamic course navigation and unlock diagnostics"
+    ]
+  }
+]
