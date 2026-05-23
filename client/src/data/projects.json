@@ -28,7 +28,7 @@
     "images": [
       "/job_portal_cover.jpg"
     ],
-    "link": "http://api.thesearchjob.com",
+    "link": "https://thesearchjob.com/",
     "github": "https://github.com/pooja-mandale/theJobSearch",
     "features": [
       "Advanced keyword, role, and location filtering",
@@ -57,7 +57,7 @@
       "/enamel/enamel (11).jpeg"
     ],
     "link": "#",
-    "github": "https://github.com/pooja-mandale/enamel",
+    "github": "https://github.com/pooja-mandale/Enameled",
     "features": [
       "Interactive subject-wise curriculum coverage",
       "Premium glassmorphic study dashboard and progress indicators",

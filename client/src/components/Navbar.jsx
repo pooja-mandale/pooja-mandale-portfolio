@@ -22,6 +22,17 @@ const Navbar = ({ isDarkMode, setIsDarkMode, onOpenResume }) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
+
   const navLinks = [
     { name: 'Intro', href: '#home' },
     { name: 'Experience', href: '#experience' },
@@ -32,15 +43,16 @@ const Navbar = ({ isDarkMode, setIsDarkMode, onOpenResume }) => {
   ]
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${scrolled ? 'h-20 bg-dark/60 backdrop-blur-xl border-b border-light/10 shadow-[0_4px_30px_rgba(99,102,241,0.03)]' : 'h-28 bg-transparent'}`}>
-      
-      {/* Scroll Progress Bar */}
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary via-secondary to-accent origin-left z-[200] pointer-events-none" 
-        style={{ scaleX }} 
-      />
+    <>
+      <header className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${isOpen ? 'h-20 bg-transparent' : scrolled ? 'h-20 bg-dark/60 backdrop-blur-xl border-b border-light/10 shadow-[0_4px_30px_rgba(99,102,241,0.03)]' : 'h-28 bg-transparent'}`}>
+        
+        {/* Scroll Progress Bar */}
+        <motion.div 
+          className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary via-secondary to-accent origin-left z-[200] pointer-events-none" 
+          style={{ scaleX }} 
+        />
 
-      <div className="relative w-full h-full max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
+        <div className="relative w-full h-full max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
         
         {/* Logo */}
         <motion.div
@@ -116,47 +128,47 @@ const Navbar = ({ isDarkMode, setIsDarkMode, onOpenResume }) => {
           </button>
         </div>
       </div>
-
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden fixed inset-0 bg-dark/95 backdrop-blur-xl flex flex-col items-center justify-center gap-12 z-40 border-b border-light/10"
-          >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href || '#'}
-                className="text-light text-sm font-medium uppercase tracking-[0.3em] hover:text-primary transition-colors cursor-pointer"
-                onClick={(e) => {
-                  setIsOpen(false);
-                  console.log('Mobile nav click:', link.name);
-                  if (link.name === 'Resume') {
-                    e.preventDefault();
-                    console.log('Resume clicked (mobile), calling onOpenResume. Prop is function:', typeof onOpenResume === 'function');
-                    if (typeof onOpenResume === 'function') {
-                      onOpenResume();
-                    } else {
-                      console.error('onOpenResume is not a function (mobile)');
-                    }
-                  } else if (link.onClick) {
-                    e.preventDefault();
-                    link.onClick();
-                  }
-                }}
-              >
-                {link.name}
-              </a>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
-  )
+
+    {/* Mobile Menu Overlay */}
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="md:hidden fixed inset-0 bg-dark/95 backdrop-blur-xl flex flex-col items-center justify-center gap-12 z-[90] border-b border-light/10"
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href || '#'}
+              className="text-light text-sm font-medium uppercase tracking-[0.3em] hover:text-primary transition-colors cursor-pointer"
+              onClick={(e) => {
+                setIsOpen(false);
+                console.log('Mobile nav click:', link.name);
+                if (link.name === 'Resume') {
+                  e.preventDefault();
+                  console.log('Resume clicked (mobile), calling onOpenResume. Prop is function:', typeof onOpenResume === 'function');
+                  if (typeof onOpenResume === 'function') {
+                    onOpenResume();
+                  } else {
+                    console.error('onOpenResume is not a function (mobile)');
+                  }
+                } else if (link.onClick) {
+                  e.preventDefault();
+                  link.onClick();
+                }
+              }}
+            >
+              {link.name}
+            </a>
+          ))}
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </>
+)
 }
 
 export default Navbar
