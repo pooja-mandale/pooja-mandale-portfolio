@@ -7,25 +7,31 @@ const skillCategories = [
     title: 'Frontend Development',
     icon: <Layout className="w-6 h-6 text-primary" />,
     hoverClass: 'hover:!bg-primary/15 hover:!text-primary hover:!border-primary/30 hover:shadow-[0_0_15px_rgba(99,102,241,0.15)] hover:-translate-y-0.5 hover:scale-105',
-    skills: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Bootstrap']
+    skills: ['React.js', 'React Native', 'TypeScript', 'JavaScript (ES6+)', 'Tailwind CSS']
   },
   {
     title: 'Backend Development',
     icon: <Server className="w-6 h-6 text-secondary" />,
     hoverClass: 'hover:!bg-secondary/15 hover:!text-secondary hover:!border-secondary/30 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:-translate-y-0.5 hover:scale-105',
-    skills: ['Node.js', 'Express']
+    skills: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'REST APIs']
   },
   {
-    title: 'Database & DevOps',
-    icon: <Database className="w-6 h-6 text-accent" />,
+    title: 'State Management',
+    icon: <Cpu className="w-6 h-6 text-accent" />,
     hoverClass: 'hover:!bg-accent/15 hover:!text-accent hover:!border-accent/30 hover:shadow-[0_0_15px_rgba(236,72,153,0.15)] hover:-translate-y-0.5 hover:scale-105',
-    skills: ['MongoDB', 'PostgreSQL', 'Redis']
+    skills: ['Redux Toolkit', 'RTK Query', 'Context API']
   },
   {
-    title: 'Other Tools',
+    title: 'Mobile & Cloud',
+    icon: <Smartphone className="w-6 h-6 text-primary" />,
+    hoverClass: 'hover:!bg-primary/15 hover:!text-primary hover:!border-primary/30 hover:shadow-[0_0_15px_rgba(99,102,241,0.15)] hover:-translate-y-0.5 hover:scale-105',
+    skills: ['Expo', 'Firebase Cloud Messaging', 'Native Modules']
+  },
+  {
+    title: 'Tools & DevOps',
     icon: <Terminal className="w-6 h-6 text-light/50" />,
     hoverClass: 'hover:!bg-light/10 hover:!text-light hover:!border-light/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:-translate-y-0.5 hover:scale-105',
-    skills: ['Git', 'Postman', 'Figma']
+    skills: ['Git', 'GitHub', 'Postman', 'VS Code', 'Hostinger VPS', 'Vercel']
   }
 ]
 

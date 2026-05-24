@@ -1,22 +1,20 @@
 [
   {
-    "id": "solar-panel",
-    "title": "Solar Energy Platform",
-    "desc": "A full-stack web application designed for the solar sector, featuring real-time energy diagnostics and analytics.",
-    "longDesc": "A comprehensive web application tailored for the solar energy sector. It integrates responsive frontend analytics with a robust backend service to monitor solar panel array efficiency, power generation outputs, battery cell charge levels, and carbon reduction metrics in real-time.",
-    "tags": ["React", "Node.js", "Tailwind CSS", "Chart.js"],
+    "id": "pm-painters",
+    "title": "PM Painters Web",
+    "desc": "A full-stack professional painting service web application built using the MERN stack and TypeScript.",
+    "longDesc": "PM Painters is a premium MERN stack web application engineered with TypeScript. It serves as a modern digital platform for professional painting services, offering users a beautiful interactive gallery, customized service inquiries, and dynamic color palettes designed to transform spaces.",
+    "tags": ["React", "TypeScript", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
     "images": [
-      "/solar_cover.jpg",
-      "/solar_analytics.png",
-      "/solar_battery.png"
+      "/pm_painters_cover.jpg"
     ],
-    "link": "https://solar-panel-project.onrender.com/",
-    "github": "https://github.com/pooja-mandale/solar-panel-project",
+    "link": "https://pm-painters-web.vercel.app/",
+    "github": "https://github.com/pooja-mandale/PM-Painters-web",
     "features": [
-      "Real-time energy generation & savings tracking",
-      "Interactive panel efficiency metrics via Chart.js",
-      "Battery health and backup power diagnostics",
-      "Responsive, clean dark mode layout"
+      "Dynamic service portfolio and color consulting",
+      "Fully responsive MERN stack architecture with TypeScript",
+      "Modern interactive user experience and layout styling",
+      "Streamlined client inquiry and consultation forms"
     ]
   },
   {
